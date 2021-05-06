@@ -2,27 +2,29 @@ const Post = require("../models/post");
 const mongoose = require("mongoose");
 
 module.exports = (app) => {
-  // CREATE
-  app.post("/new/post", (req, res) => {
-    // INSTANTIATE INSTANCE OF POST MODEL
-    const post = new Post(req.body);
-
-    // SAVE INSTANCE OF POST MODEL TO DB
-    post.save((err, post) => {
-      // REDIRECT TO THE ROOT
-      return res.redirect(`/`);
-    });
-  });
   // VIEW ALL
   app.get("/", (req, res) => {
+    var currentUser = req.user;
     Post.find({})
       .lean()
       .then((posts) => {
-        res.render("posts-index", { posts });
+        res.render("posts-index", { posts, currentUser });
       })
       .catch((err) => {
         console.log(err.message);
       });
+  });
+  // CREATE
+  app.post("/new/post", (req, res) => {
+    if (req.user) {
+      var post = new Post(req.body);
+
+      post.save(function (err, post) {
+        return res.redirect(`/`);
+      });
+    } else {
+      return res.status(401); // UNAUTHORIZED
+    }
   });
   // LOOK UP THE POST
   app.get("/posts/:id", function (req, res) {

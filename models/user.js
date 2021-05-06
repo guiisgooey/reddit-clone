@@ -12,7 +12,6 @@ const UserSchema = new Schema(
   { timestamps: { createdAt: "created_at" } }
 );
 
-// Must use function here! ES6 => functions do not bind this!
 UserSchema.pre("save", function (next) {
   // ENCRYPT PASSWORD
   const user = this;
@@ -27,7 +26,6 @@ UserSchema.pre("save", function (next) {
   });
 });
 
-// Need to use function to enable this.password to work.
 UserSchema.methods.comparePassword = function (password, done) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     done(err, isMatch);
