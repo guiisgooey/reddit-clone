@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/posts/new", (req, res) => {
+app.get("/new/post", (req, res) => {
   title = "";
   text = "";
   if (req.query.title) {
@@ -53,3 +53,5 @@ app.get("/posts/new", (req, res) => {
 app.listen(port, () => {
   console.log(`Reddit Clone listening on port ${port}!`);
 });
+
+module.exports = app;
