@@ -21,6 +21,8 @@ require("./data/reddit-db");
 
 require("./controllers/posts.js")(app);
 
+require("./controllers/comments.js")(app);
+
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
