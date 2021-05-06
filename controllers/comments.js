@@ -2,7 +2,7 @@ const Post = require("../models/post");
 const Comment = require("../models/comment");
 const mongoose = require("mongoose");
 
-module.exports = function (app) {
+module.exports = (app) => {
   // CREATE Comment
   app.post("/posts/:postId/comments", function (req, res) {
     // INSTANTIATE INSTANCE OF MODEL
