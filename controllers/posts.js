@@ -26,7 +26,6 @@ module.exports = (app) => {
   });
   // LOOK UP THE POST
   app.get("/posts/:id", function (req, res) {
-    console.log(req.params.id);
     Post.findById(mongoose.Types.ObjectId(req.params.id))
       .lean()
       .then((post) => {
@@ -34,6 +33,17 @@ module.exports = (app) => {
       })
       .catch((err) => {
         console.log(err.message);
+      });
+  });
+  // SUBREDDIT
+  app.get("/n/:subreddit", function (req, res) {
+    Post.find({ subreddit: req.params.subreddit })
+      .lean()
+      .then((posts) => {
+        res.render("posts-index", { posts });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   });
 };
