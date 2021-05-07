@@ -9,4 +9,9 @@ const CommentSchema = new Schema(
   { timestamps: { createdAt: "created_at" } }
 );
 
+CommentSchema.pre("findOne", Populate("author"))
+  .pre("find", Populate("author"))
+  .pre("findOne", Populate("comments"))
+  .pre("find", Populate("comments"));
+
 module.exports = mongoose.model("Comment", CommentSchema);

@@ -13,6 +13,9 @@ const PostSchema = new Schema(
   { timestamps: { createdAt: "created_at" } }
 );
 
+// Always populate the author field
+PostSchema.pre("findOne", Populate("author")).pre("find", Populate("author"));
+
 const Post = mongoose.model("Post", PostSchema);
 
 module.exports = Post;
