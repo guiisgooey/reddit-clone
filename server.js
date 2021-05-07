@@ -37,6 +37,8 @@ app.use(checkAuth);
 // Add after body parser initialization!
 app.use(expressValidator());
 
+app.use(express.static("public"));
+
 // Set db
 require("./data/reddit-db");
 
