@@ -46,6 +46,8 @@ require("./controllers/comments.js")(app);
 
 require("./controllers/auth.js")(app);
 
+require("./controllers/replies.js")(app);
+
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
